@@ -5,3 +5,12 @@ export interface Ward {
     name: string
     color: WardColors
 }
+
+export interface Nurse {
+    id: string
+    firstName: string
+    lastName: string
+    email: string
+    employeeID: number
+}
+
