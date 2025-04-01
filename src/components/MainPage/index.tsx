@@ -1,16 +1,16 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import api from "@/lib/api";
+import { wardAPI } from "@/lib/wardAPI";
+import { Ward } from "@/types/types";
 
 const MainPage = () => {
-  const [test, setTest] = useState("");
+  const [wards, setWards] = useState<Ward[]>([]);
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await api.get("/");
-        console.log(res);
-        setTest(res.data);
+        const response = await wardAPI.getWards();
+        setWards(response);
       } catch (error) {
         console.error("Failed to fetch data:", error);
       }
@@ -21,7 +21,9 @@ const MainPage = () => {
 
   return (
     <main>
-      <h3>{test}</h3>
+      {wards.map((item, index) => (
+        <h3 key={item.id}>{item.name}</h3>
+      ))}
     </main>
   );
 };
