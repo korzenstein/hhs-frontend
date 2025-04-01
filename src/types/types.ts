@@ -8,9 +8,11 @@ export interface Ward {
 
 export interface Nurse {
     id: string
-    firstName: string
-    lastName: string
+    first_name: string
+    last_name: string
     email: string
-    employeeID: number
+    employee_id: number
+    ward_name: string
+    ward_color: WardColors
 }
 

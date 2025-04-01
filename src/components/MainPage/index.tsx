@@ -2,28 +2,39 @@
 
 import { useEffect, useState } from "react";
 import { wardAPI } from "@/lib/wardAPI";
-import { Ward } from "@/types/types";
-
+import { Nurse, Ward } from "@/types/types";
+import { nurseAPI } from "@/lib/nurseApi";
+import NurseTable from "../NurseTable";
 const MainPage = () => {
   const [wards, setWards] = useState<Ward[]>([]);
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await wardAPI.getWards();
-        setWards(response);
-      } catch (error) {
-        console.error("Failed to fetch data:", error);
-      }
-    };
+  const [nurses, setNurses] = useState<Nurse[]>([]);
+  const fetchWardsData = async () => {
+    try {
+      const response = await wardAPI.getWards();
+      setWards(response);
+    } catch (error) {
+      console.error("Failed to fetch data:", error);
+    }
+  };
 
-    fetchData();
+  const fetchNursesData = async () => {
+    try {
+      const response = await nurseAPI.getNurses();
+      console.log(response);
+      setNurses(response);
+    } catch (error) {
+      console.error("Failed to fetch data:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchWardsData();
+    fetchNursesData();
   }, []);
 
   return (
-    <main>
-      {wards.map((item, index) => (
-        <h3 key={item.id}>{item.name}</h3>
-      ))}
+    <main style={{ width: "100%" }}>
+      <NurseTable nurses={nurses} />
     </main>
   );
 };
