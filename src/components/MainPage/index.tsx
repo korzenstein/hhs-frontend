@@ -7,7 +7,9 @@ import { nurseAPI } from "@/lib/nurseApi";
 import NurseTable from "../NurseTable";
 import NurseForm from "../NurseForm";
 import { customDebounce } from "@/helpers/customDebounce";
-import { Main } from "./styled";
+import { Main, SearchPaginationContainer, PaginationContainer } from "./styled";
+import { Button } from "../NurseTable/styled";
+import { Input } from "../NurseForm/styled";
 
 const MainPage = () => {
   const [wards, setWards] = useState<Ward[]>([]);
@@ -63,45 +65,32 @@ const MainPage = () => {
       <h1>Nurse Management</h1>
       <NurseForm wards={wards} refreshNurses={fetchNursesData} />
 
-      <div
-        style={{
-          marginTop: "1rem",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-        }}
-      >
-        <input
+      <SearchPaginationContainer>
+        <Input
           type="text"
           placeholder="Search by name or ward"
           value={search}
           onChange={handleSearchChange}
-          style={{ marginBottom: "1rem", padding: "0.5rem", width: "300px" }}
+          style={{ width: "100%" }}
         />
-        <div
-          style={{
-            display: "flex",
-            gap: "1rem",
-            alignItems: "center",
-          }}
-        >
-          <button
+        <PaginationContainer>
+          <Button
             onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
             disabled={page === 1}
           >
             Prev
-          </button>
+          </Button>
           <span>
             Page {page} of {totalPages}
           </span>
-          <button
+          <Button
             onClick={() => setPage((prev) => Math.min(prev + 1, totalPages))}
             disabled={page === totalPages}
           >
             Next
-          </button>
-        </div>
-      </div>
+          </Button>
+        </PaginationContainer>
+      </SearchPaginationContainer>
       <NurseTable
         nurses={nurses}
         refreshNurses={fetchNursesData}

@@ -28,7 +28,7 @@ export const Button = styled.button`
   background-color: #123458;
   color: white;
   border: none;
-  padding: 0.2rem 0.5rem;
+  padding: 0.2rem 0.55rem;
   border-radius: 0.2rem;
   cursor: pointer;
   font-family: "Poppins", sans-serif;
