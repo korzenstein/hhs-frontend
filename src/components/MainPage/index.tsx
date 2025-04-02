@@ -1,11 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { wardAPI } from "@/lib/wardAPI";
 import { Nurse, Ward } from "@/types/types";
 import { nurseAPI } from "@/lib/nurseApi";
 import NurseTable from "../NurseTable";
 import NurseForm from "../NurseForm";
+import { customDebounce } from "@/helpers/customDebounce";
 
 const MainPage = () => {
   const [wards, setWards] = useState<Ward[]>([]);
@@ -36,10 +37,18 @@ const MainPage = () => {
     fetchNursesData();
   }, []);
 
+  const debouncedFetchNursesData = useMemo(
+    () => customDebounce(fetchNursesData, 600),
+    []
+  );
+
+  useEffect(() => {
+    debouncedFetchNursesData(search);
+  }, [search]);
+
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setSearch(value);
-    fetchNursesData(value);
   };
 
   return (
