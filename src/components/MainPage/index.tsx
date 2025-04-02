@@ -7,6 +7,7 @@ import { nurseAPI } from "@/lib/nurseApi";
 import NurseTable from "../NurseTable";
 import NurseForm from "../NurseForm";
 import { customDebounce } from "@/helpers/customDebounce";
+import { Main } from "./styled";
 
 const MainPage = () => {
   const [wards, setWards] = useState<Ward[]>([]);
@@ -58,7 +59,7 @@ const MainPage = () => {
   const totalPages = Math.ceil(total / limit);
 
   return (
-    <main style={{ width: "100%" }}>
+    <Main>
       <input
         type="text"
         placeholder="Search by name or ward"
@@ -96,7 +97,7 @@ const MainPage = () => {
           Next
         </button>
       </div>
-    </main>
+    </Main>
   );
 };
 
