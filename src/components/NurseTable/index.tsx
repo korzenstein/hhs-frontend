@@ -98,7 +98,9 @@ const NurseTable: FunctionComponent<NurseProps> = ({
                     ))}
                   </Field>
                 </Cell>
-                <Cell>
+                <Cell
+                  style={{ gap: "1rem", display: "flex", alignItems: "center" }}
+                >
                   <Button type="button" onClick={() => handleSubmit()}>
                     Save
                   </Button>
@@ -120,7 +122,9 @@ const NurseTable: FunctionComponent<NurseProps> = ({
                 {nurse.ward_color}
               </WardColorText>
             </Cell>
-            <Cell>
+            <Cell
+              style={{ gap: "1rem", display: "flex", alignItems: "center" }}
+            >
               <Button onClick={() => handleEditToggle(nurse.id)}>Edit</Button>
               <Button onClick={() => handleNurseDeletion(nurse.id)}>
                 Delete

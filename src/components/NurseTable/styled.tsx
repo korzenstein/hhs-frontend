@@ -3,6 +3,7 @@ import { Field } from "formik";
 
 export const GridWrapper = styled.div`
   padding: 1rem;
+  margin-bottom: 3rem;
 `;
 
 export const Grid = styled.div`
@@ -10,7 +11,7 @@ export const Grid = styled.div`
   grid-template-columns: repeat(5, 1fr);
   gap: 1rem;
   padding: 1rem;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #d4c9be;
 `;
 
 export const Header = styled(Grid)`
@@ -24,7 +25,24 @@ export const Cell = styled.div`
 `;
 
 export const Button = styled.button`
-  margin-right: 0.5rem;
+  background-color: #123458;
+  color: white;
+  border: none;
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.2rem;
+  cursor: pointer;
+  font-family: "Poppins", sans-serif;
+  font-size: 1rem;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: #0059c1;
+  }
+
+  &:disabled {
+    background-color: #d4c9be;
+    cursor: not-allowed;
+  }
 `;
 
 export const SelectField = styled.select`
@@ -40,7 +58,7 @@ export const InputField = styled(Field)`
   width: 100%;
   padding: 0.25rem;
   font-size: 1rem;
-  border: 1px solid black;
+  border: 1px solid #d4c9be;
   border-radius: 0.2rem;
 `;
 
