@@ -18,7 +18,7 @@ export interface Nurse {
 }
 
 
-export type NewNurseInput = {
+export type NurseInput = {
   first_name: string;
   last_name: string;
   email: string;

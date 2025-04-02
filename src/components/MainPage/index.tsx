@@ -6,6 +6,7 @@ import { Nurse, Ward } from "@/types/types";
 import { nurseAPI } from "@/lib/nurseApi";
 import NurseTable from "../NurseTable";
 import NurseForm from "../NurseForm";
+
 const MainPage = () => {
   const [wards, setWards] = useState<Ward[]>([]);
   const [nurses, setNurses] = useState<Nurse[]>([]);
@@ -37,7 +38,11 @@ const MainPage = () => {
   return (
     <main style={{ width: "100%" }}>
       <NurseForm wards={wards} refreshNurses={fetchNursesData} />
-      <NurseTable nurses={nurses} refreshNurses={fetchNursesData} />
+      <NurseTable
+        nurses={nurses}
+        refreshNurses={fetchNursesData}
+        wards={wards}
+      />
     </main>
   );
 };
