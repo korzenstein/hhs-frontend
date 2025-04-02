@@ -37,7 +37,7 @@ const MainPage = () => {
   return (
     <main style={{ width: "100%" }}>
       <NurseForm wards={wards} />
-      <NurseTable nurses={nurses} />
+      <NurseTable nurses={nurses} refreshNurses={fetchNursesData} />
     </main>
   );
 };

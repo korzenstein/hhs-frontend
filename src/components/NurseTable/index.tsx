@@ -1,11 +1,26 @@
 import { Nurse } from "@/types/types";
 import { FunctionComponent } from "react";
+import { nurseAPI } from "@/lib/nurseApi";
 
 type NurseProps = {
   nurses: Nurse[];
+  refreshNurses: () => Promise<void>;
 };
 
-const NurseTable: FunctionComponent<NurseProps> = ({ nurses }) => {
+const NurseTable: FunctionComponent<NurseProps> = ({
+  nurses,
+  refreshNurses,
+}) => {
+  const handleNurseDeletion = async (nurseID: string) => {
+    try {
+      const response = await nurseAPI.deleteNurse(nurseID);
+      console.log(response);
+      await refreshNurses();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <table style={{ width: "100%" }}>
       <thead>
@@ -28,7 +43,9 @@ const NurseTable: FunctionComponent<NurseProps> = ({ nurses }) => {
             <td>{nurse.ward_color}</td>
             <td>
               <button>Edit</button>
-              <button>Delete</button>
+              <button onClick={() => handleNurseDeletion(nurse.id)}>
+                Delete
+              </button>
             </td>
           </tr>
         ))}
