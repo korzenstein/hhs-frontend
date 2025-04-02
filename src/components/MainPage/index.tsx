@@ -10,6 +10,7 @@ import NurseForm from "../NurseForm";
 const MainPage = () => {
   const [wards, setWards] = useState<Ward[]>([]);
   const [nurses, setNurses] = useState<Nurse[]>([]);
+  const [search, setSearch] = useState("");
 
   const fetchWardsData = async () => {
     try {
@@ -20,9 +21,9 @@ const MainPage = () => {
     }
   };
 
-  const fetchNursesData = async () => {
+  const fetchNursesData = async (query = "") => {
     try {
-      const response = await nurseAPI.getNurses();
+      const response = await nurseAPI.getNurses(query);
       console.log(response);
       setNurses(response);
     } catch (error) {
@@ -35,8 +36,21 @@ const MainPage = () => {
     fetchNursesData();
   }, []);
 
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setSearch(value);
+    fetchNursesData(value);
+  };
+
   return (
     <main style={{ width: "100%" }}>
+      <input
+        type="text"
+        placeholder="Search by name or ward"
+        value={search}
+        onChange={handleSearchChange}
+        style={{ marginBottom: "1rem", padding: "0.5rem", width: "300px" }}
+      />
       <NurseForm wards={wards} refreshNurses={fetchNursesData} />
       <NurseTable
         nurses={nurses}
