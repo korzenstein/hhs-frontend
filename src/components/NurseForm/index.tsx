@@ -4,6 +4,7 @@ import { FunctionComponent } from "react";
 import { useFormik } from "formik";
 import { Ward } from "@/types/types";
 import * as yup from "yup";
+import { nurseAPI } from "@/lib/nurseApi";
 
 export const nurseSchema = yup.object({
   first_name: yup.string().required("First name is required"),
@@ -14,9 +15,10 @@ export const nurseSchema = yup.object({
 
 type WardsProps = {
   wards: Ward[];
+  refreshNurses: () => Promise<void>;
 };
 
-const NurseForm: FunctionComponent<WardsProps> = ({ wards }) => {
+const NurseForm: FunctionComponent<WardsProps> = ({ wards, refreshNurses }) => {
   const formik = useFormik({
     initialValues: {
       first_name: "",
@@ -27,7 +29,9 @@ const NurseForm: FunctionComponent<WardsProps> = ({ wards }) => {
     validationSchema: nurseSchema,
     onSubmit: async (values, { resetForm }) => {
       try {
-        console.log(values);
+        const response = await nurseAPI.createNurse(values);
+        await refreshNurses();
+        console.log(response);
         resetForm();
       } catch (err) {
         console.error("Failed to create nurse", err);

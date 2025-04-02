@@ -16,3 +16,11 @@ export interface Nurse {
     ward_color: WardColors
 }
 
+
+export type NewNurseInput = {
+  first_name: string;
+  last_name: string;
+  email: string;
+  ward_id: string;
+};
+
