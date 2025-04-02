@@ -5,6 +5,16 @@ import { useFormik } from "formik";
 import { Ward } from "@/types/types";
 import * as yup from "yup";
 import { nurseAPI } from "@/lib/nurseApi";
+import {
+  FormWrapper,
+  FieldGroup,
+  Label,
+  Input,
+  Select,
+  ErrorText,
+  SubmitButton,
+} from "./styled";
+import { SelectField } from "../NurseTable/styled";
 
 export const nurseSchema = yup.object({
   first_name: yup.string().required("First name is required"),
@@ -40,38 +50,36 @@ const NurseForm: FunctionComponent<WardsProps> = ({ wards, refreshNurses }) => {
   });
 
   return (
-    <form onSubmit={formik.handleSubmit}>
-      <h2>Add New Nurse</h2>
-
-      <div>
-        <label>First Name:</label>
-        <input
+    <FormWrapper onSubmit={formik.handleSubmit}>
+      <FieldGroup>
+        <Label htmlFor="first_name">First Name</Label>
+        <Input
           name="first_name"
           value={formik.values.first_name}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
         />
         {formik.touched.first_name && formik.errors.first_name && (
-          <p>{formik.errors.first_name}</p>
+          <ErrorText>{formik.errors.first_name}</ErrorText>
         )}
-      </div>
+      </FieldGroup>
 
-      <div>
-        <label>Last Name:</label>
-        <input
+      <FieldGroup>
+        <Label htmlFor="last_name">Last Name</Label>
+        <Input
           name="last_name"
           value={formik.values.last_name}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
         />
         {formik.touched.last_name && formik.errors.last_name && (
-          <p>{formik.errors.last_name}</p>
+          <ErrorText>{formik.errors.last_name}</ErrorText>
         )}
-      </div>
+      </FieldGroup>
 
-      <div>
-        <label>Email:</label>
-        <input
+      <FieldGroup>
+        <Label htmlFor="email">Email</Label>
+        <Input
           name="email"
           type="email"
           value={formik.values.email}
@@ -79,13 +87,14 @@ const NurseForm: FunctionComponent<WardsProps> = ({ wards, refreshNurses }) => {
           onBlur={formik.handleBlur}
         />
         {formik.touched.email && formik.errors.email && (
-          <p>{formik.errors.email}</p>
+          <ErrorText>{formik.errors.email}</ErrorText>
         )}
-      </div>
+      </FieldGroup>
 
-      <div>
-        <label>Ward:</label>
-        <select
+      <FieldGroup>
+        <Label htmlFor="ward_id">Ward</Label>
+        <Select
+          as={SelectField}
           name="ward_id"
           value={formik.values.ward_id}
           onChange={formik.handleChange}
@@ -97,16 +106,16 @@ const NurseForm: FunctionComponent<WardsProps> = ({ wards, refreshNurses }) => {
               {ward.name} ({ward.color})
             </option>
           ))}
-        </select>
+        </Select>
         {formik.touched.ward_id && formik.errors.ward_id && (
-          <p>{formik.errors.ward_id}</p>
+          <ErrorText>{formik.errors.ward_id}</ErrorText>
         )}
-      </div>
+      </FieldGroup>
 
-      <button type="submit" disabled={formik.isSubmitting}>
+      <SubmitButton type="submit" disabled={formik.isSubmitting}>
         {formik.isSubmitting ? "Submitting..." : "Add Nurse"}
-      </button>
-    </form>
+      </SubmitButton>
+    </FormWrapper>
   );
 };
 
