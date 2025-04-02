@@ -60,43 +60,53 @@ const MainPage = () => {
 
   return (
     <Main>
-      <input
-        type="text"
-        placeholder="Search by name or ward"
-        value={search}
-        onChange={handleSearchChange}
-        style={{ marginBottom: "1rem", padding: "0.5rem", width: "300px" }}
-      />
+      <h1>Nurse Management</h1>
       <NurseForm wards={wards} refreshNurses={fetchNursesData} />
+
+      <div
+        style={{
+          marginTop: "1rem",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}
+      >
+        <input
+          type="text"
+          placeholder="Search by name or ward"
+          value={search}
+          onChange={handleSearchChange}
+          style={{ marginBottom: "1rem", padding: "0.5rem", width: "300px" }}
+        />
+        <div
+          style={{
+            display: "flex",
+            gap: "1rem",
+            alignItems: "center",
+          }}
+        >
+          <button
+            onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
+            disabled={page === 1}
+          >
+            Prev
+          </button>
+          <span>
+            Page {page} of {totalPages}
+          </span>
+          <button
+            onClick={() => setPage((prev) => Math.min(prev + 1, totalPages))}
+            disabled={page === totalPages}
+          >
+            Next
+          </button>
+        </div>
+      </div>
       <NurseTable
         nurses={nurses}
         refreshNurses={fetchNursesData}
         wards={wards}
       />
-      <div
-        style={{
-          marginTop: "1rem",
-          display: "flex",
-          gap: "1rem",
-          alignItems: "center",
-        }}
-      >
-        <button
-          onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
-          disabled={page === 1}
-        >
-          Prev
-        </button>
-        <span>
-          Page {page} of {totalPages}
-        </span>
-        <button
-          onClick={() => setPage((prev) => Math.min(prev + 1, totalPages))}
-          disabled={page === totalPages}
-        >
-          Next
-        </button>
-      </div>
     </Main>
   );
 };
