@@ -1,11 +1,20 @@
 "use client";
 
-import { Nurse, Ward } from "@/types/types";
+import { Nurse, Ward, WardColors } from "@/types/types";
 import { FunctionComponent, useState } from "react";
 import { nurseAPI } from "@/lib/nurseApi";
 import { Formik, Field } from "formik";
 import { nurseSchema } from "../NurseForm";
-import { Grid, Header, Cell, SelectField, InputField, Button } from "./styled";
+import {
+  Grid,
+  Header,
+  Cell,
+  SelectField,
+  InputField,
+  Button,
+  GridWrapper,
+  WardColorText,
+} from "./styled";
 
 type NurseProps = {
   nurses: Nurse[];
@@ -37,8 +46,9 @@ const NurseTable: FunctionComponent<NurseProps> = ({
     }
   };
 
+  console.log(nurses);
   return (
-    <div>
+    <GridWrapper>
       <Header>
         <Cell>First Name</Cell>
         <Cell>Last Name</Cell>
@@ -105,7 +115,10 @@ const NurseTable: FunctionComponent<NurseProps> = ({
             <Cell>{nurse.last_name}</Cell>
             <Cell>{nurse.email}</Cell>
             <Cell>
-              {nurse.ward_name} / {nurse.ward_color}
+              {nurse.ward_name}
+              <WardColorText $color={nurse.ward_color}>
+                {nurse.ward_color}
+              </WardColorText>
             </Cell>
             <Cell>
               <Button onClick={() => handleEditToggle(nurse.id)}>Edit</Button>
@@ -116,7 +129,7 @@ const NurseTable: FunctionComponent<NurseProps> = ({
           </Grid>
         )
       )}
-    </div>
+    </GridWrapper>
   );
 };
 

@@ -1,6 +1,10 @@
 import styled from "styled-components";
 import { Field } from "formik";
 
+export const GridWrapper = styled.div`
+  padding: 1rem;
+`;
+
 export const Grid = styled.div`
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -38,4 +42,24 @@ export const InputField = styled(Field)`
   font-size: 1rem;
   border: 1px solid black;
   border-radius: 0.2rem;
+`;
+
+interface WardColorTextProps {
+  $color: string;
+}
+
+export const WardColorText = styled.span<WardColorTextProps>`
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.2rem;
+  margin-left: 0.5rem;
+  background: ${({ $color }) =>
+    $color === "Red"
+      ? "#e53935"
+      : $color === "Green"
+      ? "#43a047"
+      : $color === "Blue"
+      ? "#1e88e5"
+      : $color === "Yellow"
+      ? "#fdd835"
+      : "black"};
 `;
