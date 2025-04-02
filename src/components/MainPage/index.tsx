@@ -7,7 +7,12 @@ import { nurseAPI } from "@/lib/nurseApi";
 import NurseTable from "../NurseTable";
 import NurseForm from "../NurseForm";
 import { customDebounce } from "@/helpers/customDebounce";
-import { Main, SearchPaginationContainer, PaginationContainer } from "./styled";
+import {
+  Main,
+  SearchPaginationContainer,
+  PaginationContainer,
+  H1,
+} from "./styled";
 import { Button } from "../NurseTable/styled";
 import { Input } from "../NurseForm/styled";
 
@@ -62,7 +67,7 @@ const MainPage = () => {
 
   return (
     <Main>
-      <h1>Nurse Management</h1>
+      <H1>Nurse Management</H1>
       <NurseForm wards={wards} refreshNurses={fetchNursesData} />
 
       <SearchPaginationContainer>

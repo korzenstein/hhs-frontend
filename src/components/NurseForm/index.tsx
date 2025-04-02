@@ -12,9 +12,9 @@ import {
   Input,
   Select,
   ErrorText,
-  SubmitButton,
 } from "./styled";
 import { SelectField } from "../NurseTable/styled";
+import { Button } from "../NurseTable/styled";
 
 export const nurseSchema = yup.object({
   first_name: yup.string().required("First name is required"),
@@ -112,9 +112,17 @@ const NurseForm: FunctionComponent<WardsProps> = ({ wards, refreshNurses }) => {
         )}
       </FieldGroup>
 
-      <SubmitButton type="submit" disabled={formik.isSubmitting}>
-        {formik.isSubmitting ? "Submitting..." : "Add Nurse"}
-      </SubmitButton>
+      <FieldGroup
+        style={{
+          alignItems: "flex-start",
+          justifyContent: "flex-end",
+          paddingBottom: "0.2rem",
+        }}
+      >
+        <Button type="submit" disabled={formik.isSubmitting}>
+          {formik.isSubmitting ? "Submitting..." : "Add Nurse"}
+        </Button>
+      </FieldGroup>
     </FormWrapper>
   );
 };

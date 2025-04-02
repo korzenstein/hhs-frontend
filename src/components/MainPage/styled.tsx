@@ -4,6 +4,13 @@ export const Main = styled.main`
   width: 100%;
 `;
 
+export const H1 = styled.h1`
+  width: 100%;
+  text-transform: uppercase;
+  padding: 1rem 1.5rem;
+  text-decoration: underline #123458;
+`;
+
 export const SearchPaginationContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(5, 1fr);
