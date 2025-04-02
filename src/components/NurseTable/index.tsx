@@ -1,5 +1,5 @@
-import { Nurse } from "@/types/types";
-import { FunctionComponent } from "react";
+import { Nurse, Ward } from "@/types/types";
+import { FunctionComponent, use, useState } from "react";
 import { nurseAPI } from "@/lib/nurseApi";
 
 type NurseProps = {
@@ -11,6 +11,8 @@ const NurseTable: FunctionComponent<NurseProps> = ({
   nurses,
   refreshNurses,
 }) => {
+  const [isEditMode, setIsEditMode] = useState(false);
+
   const handleNurseDeletion = async (nurseID: string) => {
     try {
       const response = await nurseAPI.deleteNurse(nurseID);
@@ -21,6 +23,10 @@ const NurseTable: FunctionComponent<NurseProps> = ({
     }
   };
 
+  const handleEditToggle = () => {
+    setIsEditMode(!isEditMode);
+  };
+
   return (
     <table style={{ width: "100%" }}>
       <thead>
@@ -29,20 +35,31 @@ const NurseTable: FunctionComponent<NurseProps> = ({
           <th>Last Name</th>
           <th>Email</th>
           <th>Ward</th>
-          <th>Color</th>
           <th>Actions</th>
         </tr>
       </thead>
       <tbody>
         {nurses.map((nurse) => (
           <tr key={nurse.id}>
-            <td>{nurse.first_name}</td>
-            <td>{nurse.last_name}</td>
-            <td>{nurse.email}</td>
-            <td>{nurse.ward_name}</td>
-            <td>{nurse.ward_color}</td>
+            {isEditMode ? (
+              <>
+                <td>Edit</td>
+                <td>Edit</td>
+                <td>Edit</td>
+                <td>Edit</td>
+              </>
+            ) : (
+              <>
+                <td>{nurse.first_name}</td>
+                <td>{nurse.last_name}</td>
+                <td>{nurse.email}</td>
+                <td>
+                  {nurse.ward_name} / {nurse.ward_color}
+                </td>
+              </>
+            )}
             <td>
-              <button>Edit</button>
+              <button onClick={handleEditToggle}>Edit</button>
               <button onClick={() => handleNurseDeletion(nurse.id)}>
                 Delete
               </button>

@@ -14,6 +14,7 @@ export interface Nurse {
     employee_id: number
     ward_name: string
     ward_color: WardColors
+    ward_id: string
 }
 
 
